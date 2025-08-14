@@ -51,7 +51,7 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	}
 	
 	//push data to the back of the list
-	public void push(T newData) {
+	public void pushBack(T newData) {
 		//push straight to head if empty
 		if (this.head == null) {
 			this.head = new Node(newData);

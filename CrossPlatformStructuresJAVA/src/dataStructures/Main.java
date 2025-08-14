@@ -5,14 +5,14 @@ public class Main {
 	public static void main(String[] args) {
     
 		DoublyLinkedList<Integer> mylist = new DoublyLinkedList<Integer>();
-		mylist.push(1);
-		mylist.push(2);
-		mylist.push(3);
-		mylist.push(4);
-		mylist.push(5);
-		mylist.push(6);
-		mylist.push(7);
-		mylist.push(8);
+		mylist.pushBack(1);
+		mylist.pushBack(2);
+		mylist.pushBack(3);
+		mylist.pushBack(4);
+		mylist.pushBack(5);
+		mylist.pushBack(6);
+		mylist.pushBack(7);
+		mylist.pushBack(8);
 		int value = (int)mylist.popAt(1).getData();
 		
 		for (int i=0; i<mylist.size(); ++i) {
