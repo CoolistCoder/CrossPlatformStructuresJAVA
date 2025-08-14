@@ -33,6 +33,23 @@ public abstract class LinkedList<T> {
 		void setPrev(Node newPrev) {
 			this.prev = newPrev;
 		}
+		
+		
+		//Constructors
+		Node(T newData){
+			this(newData, null, null);
+		}
+		
+		Node(T newData, Node newNext){
+			this(newData, newNext, null);
+		}
+		
+		Node(T newData, Node newNext, Node newPrev){
+			this.setData(newData);
+			this.setNext(newNext);
+			this.setPrev(newPrev);
+		}
+		
 	}
 	
 	public abstract int size(); //Retrieves the number of nodes in the list
