@@ -41,23 +41,32 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 	
 	//remove the node from at
 	public void removeAt(int at) {
-		Node temp = goToAt(at);
-		//if head node
-		if (temp == this.head) {
-			this.head = temp.getNext();
-		}
-		//if last node
-		else if (temp==getLastNode()) {
-			temp = this.goToAt(at-1);
-			temp.setNext(null);
-		}
-		//if not first or last
-		else {
-			Node previous, after;
-			previous = this.goToAt(at-1);
-			after = this.goToAt(at+1);
-			previous.setNext(after);
+		Node temp = this.head;
+		Node prev = null;	//only used for single lists
+		
+		//throw out "at" that doesn't fit in domain
+		if (0 <= at && at < this.size()) {
+			//do nothing if the list is empty
+			if (temp == null) {
+				return;
+			}
 			
+			//if head node
+			if (at == 0) {
+				this.head = temp.getNext();
+			}
+			
+			//if any other node
+			else {
+				int iterator = 0;
+				while (temp.getNext()!=null && iterator < at) {
+					prev = temp;
+					temp = temp.getNext();
+					++iterator;
+				}
+				
+				prev.setNext(temp.getNext());
+			}
 		}
 	}
 	
