@@ -1,23 +1,7 @@
 package dataStructures;
 
-import dataStructures.LinkedList.Node;
-
 public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	private Node head;	//Very first node in the list
-	
-	//find the last node in the list
-	private Node getLastNode() {
-		//make sure the head is not empty
-		Node temp = this.head;
-		if (temp != null) {
-			//iterate through each node until the 
-			//last node is found
-			while (temp.getNext()!=null) {
-				temp = temp.getNext();
-			}
-		}
-		return temp;
-	}
 	
 	//retrieve the node from at
 	private Node goToAt(int at) {
@@ -43,8 +27,7 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	
 	//remove the node from at
 	public Node popAt(int at) {
-		Node temp = this.head;
-		Node prev = null;	//only used for single lists
+		Node temp = goToAt(at);
 		
 		//throw out "at" that doesn't fit in domain
 		if (0 <= at && at < this.size()) {
@@ -53,22 +36,16 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 				return null;
 			}
 			
-			//if head node, then pop the head
+			//pop head if 0
 			if (at == 0) {
-				this.head = temp.getNext();
-				
+				this.head = this.head.getNext();
+				this.head.setPrev(null);
+				return this.head;
 			}
 			
-			//if any other node, pop that node
-			else {
-				int iterator = 0;
-				while (temp.getNext()!=null && iterator < at) {
-					prev = temp;
-					temp = temp.getNext();
-					++iterator;
-				}
-				prev.setNext(temp.getNext());
-			}
+			//pops are much easier in doubly linked list
+			temp.getPrev().setNext(temp.getNext());
+			temp.getNext().setPrev(temp.getPrev());
 		}
 		return temp;
 	}
@@ -82,8 +59,20 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 		else {
 			//when head is not empty, iterate to the next point
 			//that can be made into a new node
-			Node temp = this.getLastNode();
+			//make sure the head is not empty
+			Node temp = this.head;
+			Node prev = null;
+			if (temp != null) {
+				//iterate through each node until the 
+				//last node is found
+				while (temp.getNext()!=null) {
+					prev = temp;
+					temp = temp.getNext();
+				}
+			}
+			
 			temp.setNext(new Node(newData));
+			temp.setPrev(prev);
 		}
 	}
 	
