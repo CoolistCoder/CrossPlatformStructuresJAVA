@@ -3,8 +3,8 @@ package dataStructures;
 public class Main {
 
 	public static void main(String[] args) {
-		SinglyLinkedList<Integer> mylist = new SinglyLinkedList<Integer>();
-		int value;
+    
+		DoublyLinkedList<Integer> mylist = new DoublyLinkedList<Integer>();
 		mylist.push(1);
 		mylist.push(2);
 		mylist.push(3);
@@ -13,7 +13,8 @@ public class Main {
 		mylist.push(6);
 		mylist.push(7);
 		mylist.push(8);
-		value = (int)(mylist.popAt(5).getData());
+		mylist.popAt(1);
+
 		for (int i=0; i<mylist.size(); ++i) {
 			
 			System.out.println(mylist.getAt(i));
