@@ -19,17 +19,19 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 	
 	//retrieve the node from at
 	private Node goToAt(int at) {
-		Node temp = this.head;
-		if (temp != null) {
-			//iterate through each node until
-			//the last node is found or the
-			//iteration value is met
-			int iterator = 0;
-			while (temp.getNext()!=null && iterator < at) {
-				temp = temp.getNext();
-				++iterator;
+		if (0 <= at && at < this.size()) {
+			Node temp = this.head;
+			if (temp != null) {
+				//iterate through each node until
+				//the last node is found or the
+				//iteration value is met
+				int iterator = 0;
+				while (temp.getNext()!=null && iterator < at) {
+					temp = temp.getNext();
+					++iterator;
+				}
+				return temp;
 			}
-			return temp;
 		}
 		return null;
 	}
