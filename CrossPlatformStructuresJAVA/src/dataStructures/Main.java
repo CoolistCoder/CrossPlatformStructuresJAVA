@@ -13,7 +13,7 @@ public class Main {
 		mylist.push(6);
 		mylist.push(7);
 		mylist.push(8);
-		mylist.removeAt(5);
+		System.out.println(mylist.popAt(5).getData());
 		for (int i=0; i<mylist.size(); ++i) {
 			System.out.println(mylist.getAt(i));
 		}

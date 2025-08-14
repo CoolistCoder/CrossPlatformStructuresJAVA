@@ -40,7 +40,7 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 	}
 	
 	//remove the node from at
-	public void removeAt(int at) {
+	public Node popAt(int at) {
 		Node temp = this.head;
 		Node prev = null;	//only used for single lists
 		
@@ -48,15 +48,16 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 		if (0 <= at && at < this.size()) {
 			//do nothing if the list is empty
 			if (temp == null) {
-				return;
+				return null;
 			}
 			
-			//if head node
+			//if head node, then pop the head
 			if (at == 0) {
 				this.head = temp.getNext();
+				
 			}
 			
-			//if any other node
+			//if any other node, pop that node
 			else {
 				int iterator = 0;
 				while (temp.getNext()!=null && iterator < at) {
@@ -64,10 +65,10 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 					temp = temp.getNext();
 					++iterator;
 				}
-				
 				prev.setNext(temp.getNext());
 			}
 		}
+		return temp;
 	}
 	
 	//push data to the back of the list
