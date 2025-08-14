@@ -8,6 +8,7 @@ public class Main {
 		mylist.push(1);
 		mylist.push(2);
 		mylist.push(3);
+		mylist.removeAt(6);
 		for (int i=0; i<mylist.size(); ++i) {
 			System.out.println(mylist.getAt(i));
 		}

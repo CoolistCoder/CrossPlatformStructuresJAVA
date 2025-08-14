@@ -3,6 +3,7 @@ package dataStructures;
 public class SinglyLinkedList<T> extends LinkedList<Object> {
 	private Node head;	//Very first node in the list
 	
+	//find the last node in the list
 	private Node getLastNode() {
 		//make sure the head is not empty
 		Node temp = this.head;
@@ -16,7 +17,8 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 		return temp;
 	}
 	
-	public Object getAt(int at) {
+	//retrieve the node from at
+	private Node goToAt(int at) {
 		Node temp = this.head;
 		if (temp != null) {
 			//iterate through each node until
@@ -27,9 +29,36 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 				temp = temp.getNext();
 				++iterator;
 			}
-			return temp.getData();
+			return temp;
 		}
 		return null;
+	}
+	
+	//retrieve the data from at
+	public Object getAt(int at) {
+		return goToAt(at).getData();
+	}
+	
+	//remove the node from at
+	public void removeAt(int at) {
+		Node temp = goToAt(at);
+		//if head node
+		if (temp == this.head) {
+			this.head = temp.getNext();
+		}
+		//if last node
+		else if (temp==getLastNode()) {
+			temp = this.goToAt(at-1);
+			temp.setNext(null);
+		}
+		//if not first or last
+		else {
+			Node previous, after;
+			previous = this.goToAt(at-1);
+			after = this.goToAt(at+1);
+			previous.setNext(after);
+			
+		}
 	}
 	
 	//push data to the back of the list
