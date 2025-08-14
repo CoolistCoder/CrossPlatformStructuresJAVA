@@ -13,8 +13,8 @@ public class Main {
 		mylist.push(6);
 		mylist.push(7);
 		mylist.push(8);
-		mylist.popAt(1);
-
+		int value = (int)mylist.popAt(1).getData();
+		
 		for (int i=0; i<mylist.size(); ++i) {
 			
 			System.out.println(mylist.getAt(i));
