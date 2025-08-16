@@ -4,6 +4,7 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	private Node head;	//Very first node in the list
 	private Node tail;  //very last node in the list
 	
+	//O(n)
 	//retrieve the node from at
 	private Node goToAt(int at) {
 		//throw out "at" that doesn't fit in domain
@@ -25,17 +26,12 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 					iterator--;
 				}
 			}
-			
-			if (temp != null) {
-				
-				
-				
-				return temp;
-			}
+			return temp;
 		}
 		return null;
 	}
 	
+	//O(n)
 	//retrieve the data from at
 	public Object getAt(int at) {
 		return goToAt(at).getData();
@@ -44,16 +40,31 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	//remove the node from at
 	public Node popAt(int at) {
 		Node temp = goToAt(at);
-		//do nothing if the list is empty
+		//Out of bounds error
 		if (temp == null) {
 			return null;
 		}
 		
-		//pop head if 0
-		if (at == 0) {
+		//Pop head if at head
+		if (temp == this.head) {
 			this.head = this.head.getNext();
-			this.head.setPrev(null);
-			return this.head;
+			if (this.head != null) {
+				this.head.setPrev(null); //delete head node only, preserve rest
+			} else {
+				this.tail = null; //clear out the list if head is only node
+			}
+			return temp;
+		}
+		
+		//Pop tail if at tail
+		if (temp == this.tail) {
+			this.tail = this.tail.getPrev();
+			if (this.tail != null) {
+				this.tail.setNext(null); //delete head node only, preserve rest
+			} else {
+				this.tail = null; //clear out the list if head is only node
+			}
+			return temp;
 		}
 		
 		//pops are much easier in doubly linked list
