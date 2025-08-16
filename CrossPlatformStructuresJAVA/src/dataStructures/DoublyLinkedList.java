@@ -3,6 +3,16 @@ package dataStructures;
 public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	private Node head;	//Very first node in the list
 	private Node tail;  //very last node in the list
+	private int SIZE;	//number of elements calc'd with pushes and pops
+	
+	//iterators
+	private void sizeUp() {
+		++this.SIZE;
+	}
+	
+	private void sizeDown() {
+		--this.SIZE;
+	}
 	
 	//O(n)
 	//retrieve the node from at
@@ -37,6 +47,7 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 		return goToAt(at).getData();
 	}
 	
+	//O(n)
 	//remove the node from at
 	public Node popAt(int at) {
 		Node temp = goToAt(at);
@@ -53,6 +64,7 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 			} else {
 				this.tail = null; //clear out the list if head is only node
 			}
+			this.sizeDown();
 			return temp;
 		}
 		
@@ -64,12 +76,14 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 			} else {
 				this.tail = null; //clear out the list if head is only node
 			}
+			this.sizeDown();
 			return temp;
 		}
 		
 		//pops are much easier in doubly linked list
 		temp.getPrev().setNext(temp.getNext());
 		temp.getNext().setPrev(temp.getPrev());
+		this.sizeDown();
 		return temp;
 	}
 	
@@ -81,16 +95,22 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 		if (this.head == null) {
 			this.head = newnode;
 			this.tail = newnode;
+			this.sizeUp();
 		}
 		else {
 			//just push to the end
 			this.tail.setNext(newnode);
 			newnode.setPrev(tail);
 			this.tail = newnode;
+			this.sizeUp();
 		}
 	}
 	
+	
+	
+	
 	public int size() {
+		/* This costs more time!
 		Node temp = this.head;
 		if (temp != null) {
 			//iterate through each node until
@@ -104,6 +124,8 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 			return iterator;
 		}
 		return 0;
+		*/
+		return this.SIZE;
 	}
 	
 	public DoublyLinkedList(){

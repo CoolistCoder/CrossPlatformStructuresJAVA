@@ -13,13 +13,14 @@ public class Main {
 		mylist.pushBack(6);
 		mylist.pushBack(7);
 		mylist.pushBack(8);
-		int value = (int)mylist.popAt(7).getData();
+		int value = (int)mylist.popAt(4).getData();
+		System.out.println("Size: " + mylist.size());
 		
 		for (int i=0; i<mylist.size(); ++i) {
 			
 			System.out.println(mylist.getAt(i));
 		}
-		//System.out.println("Popped value: " + value);
+		System.out.println("Popped value: " + value);
 		
 
 	}
