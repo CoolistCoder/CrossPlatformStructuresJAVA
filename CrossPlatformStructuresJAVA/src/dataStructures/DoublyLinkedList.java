@@ -2,81 +2,113 @@ package dataStructures;
 
 public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	private Node head;	//Very first node in the list
+	private Node tail;  //very last node in the list
+	private int SIZE;	//number of elements calc'd with pushes and pops
 	
+	//iterators
+	private void sizeUp() {
+		++this.SIZE;
+	}
+	
+	private void sizeDown() {
+		--this.SIZE;
+	}
+	
+	//O(n)
 	//retrieve the node from at
 	private Node goToAt(int at) {
-		Node temp = this.head;
-		if (temp != null) {
-			//iterate through each node until
-			//the last node is found or the
-			//iteration value is met
-			int iterator = 0;
-			while (temp.getNext()!=null && iterator < at) {
-				temp = temp.getNext();
-				++iterator;
+		//throw out "at" that doesn't fit in domain
+		Node temp = null;
+		if (0 <= at && at < this.size()) {
+			if (at < this.size() / 2) {
+				int iterator = 0;
+				temp = this.head;
+				while (iterator < at) {
+					temp = temp.getNext();
+					++iterator;
+				}
+			}
+			else {
+				int iterator = this.size() - 1;
+				temp = this.tail;
+				while (iterator > at) {
+					temp = temp.getPrev();
+					iterator--;
+				}
 			}
 			return temp;
 		}
 		return null;
 	}
 	
+	//O(n)
 	//retrieve the data from at
 	public Object getAt(int at) {
 		return goToAt(at).getData();
 	}
 	
+	//O(n)
 	//remove the node from at
 	public Node popAt(int at) {
 		Node temp = goToAt(at);
-		
-		//throw out "at" that doesn't fit in domain
-		if (0 <= at && at < this.size()) {
-			//do nothing if the list is empty
-			if (temp == null) {
-				return null;
-			}
-			
-			//pop head if 0
-			if (at == 0) {
-				this.head = this.head.getNext();
-				this.head.setPrev(null);
-				return this.head;
-			}
-			
-			//pops are much easier in doubly linked list
-			temp.getPrev().setNext(temp.getNext());
-			temp.getNext().setPrev(temp.getPrev());
+		//Out of bounds error
+		if (temp == null) {
+			return null;
 		}
+		
+		//Pop head if at head
+		if (temp == this.head) {
+			this.head = this.head.getNext();
+			if (this.head != null) {
+				this.head.setPrev(null); //delete head node only, preserve rest
+			} else {
+				this.tail = null; //clear out the list if head is only node
+			}
+			this.sizeDown();
+			return temp;
+		}
+		
+		//Pop tail if at tail
+		if (temp == this.tail) {
+			this.tail = this.tail.getPrev();
+			if (this.tail != null) {
+				this.tail.setNext(null); //delete head node only, preserve rest
+			} else {
+				this.tail = null; //clear out the list if head is only node
+			}
+			this.sizeDown();
+			return temp;
+		}
+		
+		//pops are much easier in doubly linked list
+		temp.getPrev().setNext(temp.getNext());
+		temp.getNext().setPrev(temp.getPrev());
+		this.sizeDown();
 		return temp;
 	}
 	
+	//O(1) optimization!
 	//push data to the back of the list
-	public void push(T newData) {
+	public void pushBack(T newData) {
+		Node newnode = new Node(newData);
 		//push straight to head if empty
 		if (this.head == null) {
-			this.head = new Node(newData);
+			this.head = newnode;
+			this.tail = newnode;
+			this.sizeUp();
 		}
 		else {
-			//when head is not empty, iterate to the next point
-			//that can be made into a new node
-			//make sure the head is not empty
-			Node temp = this.head;
-			Node prev = null;
-			if (temp != null) {
-				//iterate through each node until the 
-				//last node is found
-				while (temp.getNext()!=null) {
-					prev = temp;
-					temp = temp.getNext();
-				}
-			}
-			
-			temp.setNext(new Node(newData));
-			temp.setPrev(prev);
+			//just push to the end
+			this.tail.setNext(newnode);
+			newnode.setPrev(tail);
+			this.tail = newnode;
+			this.sizeUp();
 		}
 	}
 	
+	//O(1)
 	public int size() {
+		/* This costs more time!
 		Node temp = this.head;
 		if (temp != null) {
 			//iterate through each node until
@@ -90,6 +122,8 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 			return iterator;
 		}
 		return 0;
+		*/
+		return this.SIZE;
 	}
 	
 	public DoublyLinkedList(){
