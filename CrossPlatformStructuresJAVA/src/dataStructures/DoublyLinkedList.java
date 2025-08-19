@@ -106,9 +106,7 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 		}
 	}
 	
-	
-	
-	
+	//O(1)
 	public int size() {
 		/* This costs more time!
 		Node temp = this.head;
