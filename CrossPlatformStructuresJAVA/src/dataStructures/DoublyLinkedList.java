@@ -120,6 +120,28 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 		}
 	}
 	
+	//remove data from the back of the list
+	public Node popBack() {
+		Node temp = null;
+		if (this.head!=null) {
+			//Pop the head if its the only thing left
+			if (this.head.getNext() == null) {
+				temp = this.head;
+				this.head = null;
+				this.tail = null;
+				this.sizeDown();
+			}
+			else {
+				//just pop the end
+				temp = this.tail;
+				this.tail = this.tail.getPrev();
+				this.tail.setNext(null);
+				this.sizeDown();	
+			}
+		}
+		return temp;
+	}
+	
 	//O(1)
 	public int size() {
 		/* This costs more time!

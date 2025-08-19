@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
     
-		DoublyLinkedList<Integer> mylist = new DoublyLinkedList<Integer>();
+		SinglyLinkedList<Integer> mylist = new SinglyLinkedList<Integer>();
 		mylist.pushBack(5);
 		mylist.pushBack(2);
 		mylist.pushBack(2);
@@ -15,7 +15,7 @@ public class Main {
 		mylist.pushBack(9);
 		mylist.pushBack(7);
 		mylist.pushBack(3);
-		int value = (int)mylist.popAt(4).getData();
+		int value = (int)mylist.popBack().getData();
 		System.out.println("Size: " + mylist.size());
 		
 		//perform sort

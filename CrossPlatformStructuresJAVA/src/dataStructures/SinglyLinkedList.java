@@ -53,6 +53,12 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 		}
 	}
 	
+	//O(n)
+	//This could be better implemented TODO
+	public Node popBack() {
+		return popAt(this.size()-1);
+	}
+	
 	//remove the node from at
 	public Node popAt(int at) {
 		Node temp = this.head;
@@ -86,7 +92,7 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 	}
 	
 	//push data to the back of the list
-	public void push(T newData) {
+	public void pushBack(T newData) {
 		//push straight to head if empty
 		if (this.head == null) {
 			this.head = new Node(newData);
