@@ -1,20 +1,26 @@
 package dataStructures;
 
+import SortAlgs.BubbleSort;
+
 public class Main {
 
 	public static void main(String[] args) {
     
 		DoublyLinkedList<Integer> mylist = new DoublyLinkedList<Integer>();
-		mylist.pushBack(1);
+		mylist.pushBack(5);
 		mylist.pushBack(2);
-		mylist.pushBack(3);
+		mylist.pushBack(2);
 		mylist.pushBack(4);
 		mylist.pushBack(5);
-		mylist.pushBack(6);
+		mylist.pushBack(9);
 		mylist.pushBack(7);
-		mylist.pushBack(8);
+		mylist.pushBack(3);
 		int value = (int)mylist.popAt(4).getData();
 		System.out.println("Size: " + mylist.size());
+		
+		//perform sort
+		BubbleSort.sortLeastToGreatest(false);
+		BubbleSort.sort(mylist);
 		
 		for (int i=0; i<mylist.size(); ++i) {
 			

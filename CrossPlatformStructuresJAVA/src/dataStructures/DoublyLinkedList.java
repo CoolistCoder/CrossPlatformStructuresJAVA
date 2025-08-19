@@ -1,5 +1,7 @@
 package dataStructures;
 
+import dataStructures.LinkedList.Node;
+
 public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	private Node head;	//Very first node in the list
 	private Node tail;  //very last node in the list
@@ -45,6 +47,18 @@ public class DoublyLinkedList<T> extends LinkedList<Object>  {
 	//retrieve the data from at
 	public Object getAt(int at) {
 		return goToAt(at).getData();
+	}
+	
+	//swap data between two nodes
+	public void swapNodes(int at1, int at2) {
+		if (at1!=at2) {
+			Node node1 = goToAt(at1);
+			Node node2 = goToAt(at2);
+			
+			Object temp = node1.getData();
+			node1.setData(node2.getData());
+			node2.setData(temp);
+		}
 	}
 	
 	//O(n)
