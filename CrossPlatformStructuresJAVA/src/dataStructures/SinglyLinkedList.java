@@ -41,6 +41,18 @@ public class SinglyLinkedList<T> extends LinkedList<Object> {
 		return goToAt(at).getData();
 	}
 	
+	//swap data between two nodes
+	public void swapNodes(int at1, int at2) {
+		if (at1!=at2) {
+			Node node1 = goToAt(at1);
+			Node node2 = goToAt(at2);
+			
+			Object temp = node1.getData();
+			node1.setData(node2.getData());
+			node2.setData(temp);
+		}
+	}
+	
 	//remove the node from at
 	public Node popAt(int at) {
 		Node temp = this.head;
